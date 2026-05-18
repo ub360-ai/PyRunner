@@ -3,7 +3,7 @@ services:
     build: .
     container_name: pyrunner
     ports:
-      - "${PORT:-8000}:8000"
+      - "${PORT:-8003}:8003"
     volumes:
       # Persist database and environments
       - pyrunner_data:/app/data
@@ -33,7 +33,7 @@ services:
       - GUNICORN_TIMEOUT=${GUNICORN_TIMEOUT:-120}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8003/')"]
       interval: 30s
       timeout: 10s
       retries: 3
