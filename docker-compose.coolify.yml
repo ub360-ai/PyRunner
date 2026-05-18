@@ -2,16 +2,16 @@ services:
   pyrunner:
     image: hasanaboulhasan/pyrunner:latest
     expose:
-      - "8000"
+      - "8003"
     environment:
       # Coolify auto-fills this with the public URL of the deployment.
       # The bare token form (no '=value') signals Coolify to generate it.
-      - SERVICE_FQDN_PYRUNNER_8000
+      - SERVICE_FQDN_PYRUNNER_8003
 
       # Pin the container listening port so platform-injected PORT values
       # (some PaaS set PORT=80) cannot override it. Coolify routes Traefik
       # to this port via SERVICE_FQDN_PYRUNNER_8000.
-      - PORT=8000
+      - PORT=8003
 
       # REQUIRED — container will fail to start if these are not set.
       # See docs/COOLIFY.md for generation commands.
@@ -43,7 +43,7 @@ services:
       - pyrunner_data:/app/data
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8003/')"]
       interval: 30s
       timeout: 10s
       retries: 3
